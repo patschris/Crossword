@@ -19,10 +19,11 @@ int isEmptyPos (char *cros, int size, int x, int y ) {
  * Mode = 1 : insert slot at the end of the list
  */
 void findHorizontalSlots (SlotList *l, char *crossword, int size, int mode) {
+	int sz;
 	for (int x = 0; x < size; x++) {
 		for (int y = 0 ; y < size-1 ; y++) {
 			if (isEmptyPos(crossword, size, x, y) && isEmptyPos(crossword, size, x, y+1)) {
-				for (int sz = 2 ; y+sz < size && isEmptyPos(crossword, size, x, y+sz); sz++); // Find slot size
+				for (sz = 2 ; y+sz < size && isEmptyPos(crossword, size, x, y+sz); sz++); // Find slot size
 				if (mode) insertSlot(l, x, y, sz, HORIZONTAL);
 				else insertAtEnd (l, x, y, sz, HORIZONTAL);
 				y += sz; // Skip past this vertical slot
@@ -37,10 +38,11 @@ void findHorizontalSlots (SlotList *l, char *crossword, int size, int mode) {
  * Mode = 1 : insert slot at the end of the list
  */
 void findVerticalSlots (SlotList *l, char *crossword, int size, int mode) {
+	int sz;
 	for (int y = 0; y < size; y++) {
 		for (int x = 0; x < size-1; x++) {
 			if (isEmptyPos(crossword, size, x, y) && isEmptyPos(crossword, size, x+1, y)) {
-				for (int sz = 2 ; x+sz < size && isEmptyPos(crossword, size, x+sz, y); sz++); 
+				for (sz = 2 ; x+sz < size && isEmptyPos(crossword, size, x+sz, y); sz++); 
 				if (mode) insertSlot(l, x, y, sz, VERTICAL);
 				else insertAtEnd (l, x, y, sz, VERTICAL);
 				x += sz; // Skip past this horizontal slot
